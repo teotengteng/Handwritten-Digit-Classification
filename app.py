@@ -29,9 +29,10 @@ def prediction(filename):
     #Step 1
     my_image = plt.imread(os.path.join('uploads', filename))
     #Step 2
-    my_image_re = resize(my_image, (28,28,1))
+    #my_image_re = resize(my_image, (28,28,1))
     model.run_eagerly=True  
-    probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
+    #probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
+    probabilities = model.predict(np.array( [my_image,] ))[0,:]
     print(probabilities)
     #Step 3
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
