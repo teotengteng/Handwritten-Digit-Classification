@@ -37,8 +37,8 @@ def prediction(filename):
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
     predictions = {
-      "Predicted digit":number_to_class[index[9]],
-      "Probability":probabilities[index[9]],
+      "digit":number_to_class[index[9]],
+      "prob":probabilities[index[9]],
      }
     #Step 5
     return render_template('predict.html', predictions=predictions)
