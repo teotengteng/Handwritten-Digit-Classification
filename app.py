@@ -12,13 +12,8 @@ import tensorflow as tf
 import numpy as np 
 
 print("Loading model") 
-#global sess
-#sess = tf.compat.v1.Session()
-#set_session(sess)
 global model 
-model = load_model('AppleOrangeRGBWorking.h5') 
-#global graph
-#graph = tf.compat.v1.get_default_graph()
+model = load_model('keras_mnist.h5') 
 
 @app.route('/', methods=['GET', 'POST']) 
 def main_page():
@@ -35,22 +30,15 @@ def prediction(filename):
     my_image = plt.imread(os.path.join('uploads', filename))
     #Step 2
     my_image_re = resize(my_image, (32,32,3))
-    #Step 3
-    #with graph.as_default():
-      #set_session(sess)
-      #Add
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
-    #Step 4
-    #-JM- number_to_class = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
-    number_to_class = ['apple', 'orange']
+    #Step 3
+    number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
     predictions = {
-      "class1":number_to_class[index[1]],
-      "class0":number_to_class[index[0]],
-      "prob1":probabilities[index[1]],
-      "prob0":probabilities[index[0]],
+      "Predicted digit":number_to_class[index[9]],
+      "Probability":probabilities[index[9]],
      }
     #Step 5
     return render_template('predict.html', predictions=predictions)
