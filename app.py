@@ -13,7 +13,7 @@ import numpy as np
 
 print("Loading model") 
 global model 
-model = load_model('keras_mnist.h5') 
+model = load_model('handwriting_mnist.h5') 
 
 @app.route('/', methods=['GET', 'POST']) 
 def main_page():
@@ -29,8 +29,7 @@ def prediction(filename):
     #Step 1
     my_image = plt.imread(os.path.join('uploads', filename))
     #Step 2
-    #my_image_re = resize(my_image, (32,32,3))
-    my_image_re = resize(my_image, (28,28,1))
+    my_image_re = resize(my_image, (32,32,1))
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
@@ -38,10 +37,8 @@ def prediction(filename):
     number_to_class = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     index = np.argsort(probabilities)
     predictions = {
-      "digit1":number_to_class[index[9]],
-      "prob1":probabilities[index[9]],
-      "digit2":number_to_class[index[8]],
-      "prob2":probabilities[index[8]],
+      "digit":number_to_class[index[9]],
+      "prob":probabilities[index[9]],
      }
     #Step 5
     return render_template('predict.html', predictions=predictions)
