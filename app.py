@@ -30,7 +30,7 @@ def prediction(filename):
     my_image = plt.imread(os.path.join('uploads', filename))
     #Step 2
     #my_image_re = resize(my_image, (32,32,3))
-    my_image_re = resize(my_image, (28,28,1))
+    my_image_re = resize(my_image, (28,28))
     model.run_eagerly=True  
     probabilities = model.predict(np.array( [my_image_re,] ))[0,:]
     print(probabilities)
