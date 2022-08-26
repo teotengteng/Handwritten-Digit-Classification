@@ -13,7 +13,7 @@ import numpy as np
 
 print("Loading model") 
 global model 
-model = load_model('handwriting_mnist.h5') 
+model = load_model('handwriting.h5') 
 
 @app.route('/', methods=['GET', 'POST']) 
 def main_page():
