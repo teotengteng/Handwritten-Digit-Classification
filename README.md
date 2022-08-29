@@ -1,1 +1,1 @@
-# Handwritten-Digit-Classification
+# AI Project_Version 1
